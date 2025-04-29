@@ -2,155 +2,109 @@
 \label{chapter:intro}
 
 \section{Background to the Study}
-The study explores the development of Individual Development Plans (IDPs) using a deep learning-based recommender model. IDPs, initially introduced by the Federation of American Societies for Experimental Biology, provide a structured framework for self-assessment, goal setting, and action planning, especially for doctoral trainees \cite{vanderford2018cross}. They are crucial for aligning individual growth with organizational objectives, particularly in navigating the complexities of modern career trajectories.
 
-Recommender systems are widely used in domains like e-commerce, education, and healthcare to provide personalized suggestions. However, traditional systems face limitations, including poor adaptability to dynamic user behaviors and limited interpretability \cite{sahoo2019deepreco}. Deep learning-based systems address these challenges by leveraging neural networks to uncover intricate patterns, enabling enhanced personalization and engagement \cite{mu2018survey} and \cite{li2024attention}.
+The study explores the development of Individual Development Plans (IDPs) using a deep learning-based recommender system. IDPs, introduced by the Federation of American Societies for Experimental Biology, offer a structured framework for self-assessment, goal setting, and action planning, particularly for doctoral trainees \cite{vanderford2018cross}. They are crucial for aligning personal growth with organizational goals in today’s complex career landscapes.
 
-In the context of IDPs, advanced techniques such as attention mechanisms, knowledge graphs, and Graph Convolutional Networks effectively capture relationships among skills, goals, and resources \cite{li2024attention} and \cite{chen2024intelligent}. These advancements offer a robust foundation for developing personalized and adaptive IDP systems that address gaps in traditional approaches.
+Recommender systems, widely used in e-commerce, education, and healthcare, provide personalized suggestions. However, traditional systems often struggle with dynamic user behaviors and lack interpretability \cite{sahoo2019deepreco}. Deep learning enhances these systems by uncovering intricate user-item patterns, enabling stronger personalization and adaptability \cite{mu2018survey, li2024attention}.
 
-The current competency assessment process in place within Telecom Namibia is inefficient, labor-intensive, and open to errors, since it relies on manual means. It also lacks real-time insights into the status of the competency gaps, which in turn hinders taking timely decisions. There is a dire need for an automated, centralized platform that will enhance accuracy, scalability, and efficiency of decision-making.
+Advanced deep learning techniques like attention mechanisms, knowledge graphs, and Graph Convolutional Networks (GCNs) are highly effective for modeling relationships among employee skills, career goals, and resources \cite{li2024attention, chen2024intelligent}. These methods form the basis for building an adaptive IDP recommender system.
 
-\subsection{Objectives of the Study}
-The study will design and develop a deep learning-based recommender system for IDPs, focusing on:
+\section{Problem Statement}
+Telecom Namibia currently conducts competency assessments manually using Excel templates and email exchanges. This process is inefficient, prone to errors, and lacks real-time insights, thereby hindering timely decision-making. As the organization grows, scalability issues become apparent, necessitating an automated, centralized platform for more efficient and accurate IDP creation.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+
+        % Supervisor side (left)
+        \node[shaded-primary] (supCreate) {Supervisor drafts JCP};
+        \node[shaded-primary, below=of supCreate] (supFinalize) {Supervisor finalises ECP};
+
+        % Employee side (right)
+        \node[block-primary, right=5cm of supCreate] (empReceive) {Employee receives template};
+        \node[block-primary, below=of empReceive] (empFill) {Employee completes template};
+
+        % Senior Manager (center bottom)
+        \node[block-primary, below=1cm of supFinalize] (seniorManager) {Senior Manager evaluates ECP and recommends Development Plan};
+
+        % Horizontal arrows (Supervisor to Employee)
+        \draw[line] (supCreate.east) -- node[midway, above] {Send Template} (empReceive.west);
+        \draw[line] (empFill.west) -- node[midway, below] {Return Completed Template} (supFinalize.east);
+
+        % Vertical arrows
+        \draw[line] (empReceive) -- (empFill);
+
+        % Final vertical arrow to Senior Manager
+        \draw[line] (supFinalize) -- (seniorManager);
+
+    \end{tikzpicture}
+    \caption{Current IDP Creation Process at Telecom Namibia (Interaction View).}
+    \label{fig:idp_process_interaction}
+\end{figure}
+
+\section{Research Aim}
+The aim is to enable real-time data access, this platform will increase the effectiveness and precision of skill gap analysis. When the system is completed, management, supervisors, and staff may interact easily for training and assessments. It will automate workflows, provide real-time reporting, and scale well to support a growing user base.
+
+
+
+\section{Research Questions}
+\textbf{In what ways may deep learning techniques be applied to create a personalized and efficient recommender model that appropriately evaluates employee competencies and suggests chances for customized growth for individual development plans?}
+\ResearchQuestion{1}{Which employee data types, e.g., skills, evaluations, performance reviews, etc, are most crucial to the construction of a successful deep learning model that generates recommendations for individual growth plans? \label{rq:1}}
+
+\ResearchQuestion{2}{How can employee characteristics and past performance data be used to refine deep learning algorithms to produce precise and customized recommendations for development plans? \label{rq:2}}
+
+\ResearchQuestion{3}{In what ways can the use of real-time performance data and feedback enhance the individual growth plan recommendations' adaptability and relevance? \label{rq:3}}
+
+\ResearchQuestion{4}{What is the difference between the accuracy, employee skill development, and organizational productivity of the deep learning-based recommender system for individual development plans and the conventional approaches? \label{rq:4}}
+\section{Research Objectives}
+
+\ResearchObjective{The primary objective of this research is to design an individual development plan recommender model using deep learning.}
 
 \begin{itemize}
-    \item Designing large datasets of employee skills and their ratings.
-    \item Analyzing employee competencies and providing custom-made growth plans.
-    \item Real-time feedback integrated, updating the recommendations dynamically.
-    \item Evaluate the impacts of the system on skill building and organizational productivity against more conservative approaches.
+    \item \textbf{RO1:} To compile comprehensive datasets containing employee skills, evaluations, and development history.
+    \item \textbf{RO2:} To design a deep learning model that analyzes skill gaps and generates customized growth plans.
+    \item \textbf{RO3:} To integrate real-time feedback loops to dynamically update employee development recommendations.
+    \item \textbf{RO4:} To evaluate the effectiveness of the proposed system compared to traditional IDP development methods.
 \end{itemize}
+\section{Rationale and Motivation}
+The rapid evolution of employee competencies and organizational objectives makes manual development planning increasingly unsustainable. Automating IDP generation through AI enables scalability, accuracy, and responsiveness. Personally, this project reflects my passion for applying machine learning to real-world human resource development challenges, specifically optimizing organizational talent management systems.
 
-The preliminary literature review underscores the transformative potential of deep learning in recommender systems, addressing existing challenges and enhancing personalization. Recommender systems have been widely applied across various fields such as e-commerce, education, and healthcare to deliver personalized recommendations. For example, personalized course recommendation systems have been shown to improve user engagement and satisfaction in education \cite{gulzar2018pcrs}, while personalized health management systems have demonstrated better outcomes compared to general approaches \cite{erturkmen2019collaborative}. Despite these successes, traditional systems face significant limitations. They struggle to manage complex user behaviors, lack adaptability to dynamic preferences, and often suffer from limited interpretability, which restricts their effectiveness in providing tailored recommendations \cite{sahoo2019deepreco}.
+\section{Research Approach Overview}
+The research follows an interpretivist philosophical stance, utilizing an abductive mixed-methods strategy. Data will be collected from surveys, interviews, and organizational records. Analyses will include both thematic qualitative coding and quantitative statistical techniques, supporting the development of a deep learning recommender system.
 
-Recent advances in deep learning have significantly enhanced recommender systems by enabling the discovery of intricate patterns in user behaviors and item attributes. Hybrid approaches that combine collaborative filtering and content-based methods have shown improved system performance \cite{mu2018survey} and \cite{li2024attention}. Advanced techniques such as knowledge graphs and Graph Convolutional Networks further enhance the precision and adaptability of recommendations by capturing complex relationships in user data \cite{chen2024intelligent} and \cite{li2024attention}. These advancements are particularly relevant to Individual Development Plans (IDPs), where personalized career development recommendations are essential. Deep residual networks and attention mechanisms, for example, have been effective in mapping skills, goals, and resources \cite{li2024attention}, while real-time data and feedback loops enhance the adaptability and relevance of recommendations in dynamic career landscapes \cite{wang2020personalized}.
 
-However, gaps remain in existing research. Many systems fail to adapt dynamically to changing career trajectories, relying instead on static data that cannot capture evolving preferences \cite{dabak2022redesigning}. Additionally, personality traits, which play a critical role in decision-making, are often overlooked in current models \cite{ghaffar2022impact}. These findings highlight the opportunity for deep learning to revolutionize IDP systems by addressing these limitations, offering personalized, adaptable, and scalable solutions that align individual growth with organizational needs.
 
-\subsection{Proposed Research Design}
 
+
+\subsection{Interpretivism as a Research Philosophy}
+Interpretivism emphasizes the individuality of human experiences \cite{irshaidat2019interpretivism, Saunders2012}. Each employee's development needs are influenced by personal, social, and cultural factors \cite{myers2008qualitative}. Interpretivism opposes generalization and instead values subjective interpretations, aligning well with the need for personalized development plans.
+
+\subsection{The Research Approach}
+Following \cite{mantere2013reasoning, hurley2021integrating}, an abductive approach combines inductive and deductive reasoning. \cite{thompson2022guide} provides an 8-step abductive framework, guiding data collection, feature extraction, theme development, theorizing, model implementation, and evaluation through continuous reflection.
+
+\subsection{Research Strategy: Action Research}
+Action Research (AR), particularly Canonical Action Research (CAR) as outlined by \cite{avison1999action, davison2021research}, is adopted. AR fosters collaboration between researcher and participants in an iterative cycle of problem identification, intervention, observation, and reflection—making it highly suitable for information system development like the proposed IDP recommender.
+
+\section{Choice of Methods}
+The study adopts a mixed-methods approach, integrating qualitative insights and quantitative validation \cite{oliveira2021mixed, guetterman2016distinguishes}. Data collection will involve semi-structured interviews and structured questionnaires. Analysis will include thematic coding and statistical modeling, supporting deep learning model training and evaluation.
+
+
+
+\section{The Research Time Horizon}
+A longitudinal design will be employed to monitor participants’ development plans over time. Regular assessments will capture evolving employee competencies and measure the recommender system's long-term effectiveness \cite{kelley2011sample, jung2023longitudinal}. Careful sampling and structured engagement strategies will maintain data integrity and participant involvement.
+
+\section{Expected Deliverables and Contributions}
 \begin{itemize}
-    \item Data Collection: Mixed methods approach, combining qualitative data from interviews and quantitative data from surveys and performance records.
-\item Data Analysis: Thematic coding for qualitative insights and statistical techniques for quantitative validation.
-\item Model Development: A deep learning model trained on integrated datasets to deliver personalized recommendations.
-\item Ethical Considerations: Ensuring data protection, transparency, and fairness, with measures to mitigate biases and uphold employee privacy.
-\item Limitations: Potential challenges include data quality issues, model generalizability, and privacy concerns.
-\item Research Horizon: A longitudinal design will monitor the system's impact over time, ensuring adaptability to evolving career landscapes.
+    \item A fully functional deep learning-based IDP recommender model.
+    \item A prototype centralized platform for employee development planning.
+    \item Contributions to the field of AI-driven HR systems and personalized learning pathways.
 \end{itemize}
 
-
-\subsection{Signifigance of Study}
-It deals with a very important organizational need: the scalable and accurate assessment of skills.
-Beneficiaries include employees (personalized growth), HR managers (efficient decision-making), and organizations (improved productivity).
-It adds to the body of research into AI in human resource management through deep learning applied to customized career development.
-
-\subsection{Proposed Research Design}
-\subsubsection{Interpretivism as a Research Philosophy}
-
-Interpretivism is the main research philosophy of this study as it looks at the individual experiences as stated by \cite{irshaidat2019interpretivism}. When we look at some beliefs of interpretivism, \cite{Saunders2012} mentions relativist ontology, which explains how everybody's sense of reality is unique and varies according to viewpoints, social interactions, and past experiences. Another belief that \cite{Saunders2012} explains is subjective epistemology, which refers to how human knowledge is shaped by individual experiences.
-
-Given that interpretivism stresses the individuality of human experiences, it is critical to acknowledge the distinctiveness of each person's own development plan \cite{Saunders2012}. Since interpretivism is against generalization across contexts and contests that reality is based on personal, cultural, and environmental elements as mentioned by \cite{myers2008qualitative}, this means that even if people have comparable experiences at work, they won't all have the same development plan.
-
-\subsubsection{The Research Approach}
-
-Looking at the various research approaches, we find that there are inductive, deductive, and abductive approaches \cite{mantere2013reasoning}. Inductive approaches are directly related to interpretive philosophy, looking at the exploration into building theoretical comprehension, as stated by \cite{hurley2021integrating}. Deductive approaches follow a positivist philosophy, looking at objective reality, also mentioned by \cite{hurley2021integrating}. Finally, \cite{tavory2014abductive} define abductive approaches as a combination of both inductive and deductive approaches.
-
-\cite{thompson2022guide} had developed an 8-step framework to the application of an abductive approach to a study. Using the 8-step framework by \cite{thompson2022guide} for developing a recommender model for individual development plans is shown as follows:
-
-\begin{enumerate}[label=\arabic*.]
-    \item \textbf{Transcription and Familiarization} (This refers to collecting and understanding the data relevant to training the model):
-    \begin{itemize}
-        \item Gathering previous assessments, training plans, job descriptions, and feedback from the outcome of the previous assessment.
-    \end{itemize}
-
-    \item \textbf{Coding} (This refers to encoding the data to a format a deep learning model may understand):
-    \begin{itemize}
-        \item Using natural language processing techniques to extract and encode the data in textual format.
-    \end{itemize}
-
-    \item \textbf{Codebook} (This codebook outlines how features are extracted and encoded):
-    \begin{itemize}
-        \item Build a document that outlines the features extracted from the dataset and how they are encoded, along with their meanings and values.
-    \end{itemize}
-
-    \item \textbf{Development of Themes} (This refers to pattern recognition):
-    \begin{itemize}
-        \item Make use of unsupervised machine learning techniques to identify underlying patterns in the data.
-    \end{itemize}
-
-    \item \textbf{Theorizing} (This refers to the model implementation):
-    \begin{itemize}
-        \item Create a deep learning model by using recognized theories of learning and career development. Allow the model to identify the patterns that might oppose the preexisting hypotheses.
-    \end{itemize}
-
-    \item \textbf{Comparison of Datasets} (How the model performs in different samples of the population):
-    \begin{itemize}
-        \item Analyzing how the model would perform when it interacts with employees in different departments, divisions, and by level of seniority.
-    \end{itemize}
-
-    \item \textbf{Data Display} (Refers to how the outcomes of the model are presented):
-    \begin{itemize}
-        \item Creating a visual representation of how the model makes decisions.
-        \item Generating a visual report for the employee to view their development plan.
-    \end{itemize}
-
-    \item \textbf{Writing Up} (Refers to the documentation and user manuals):
-    \begin{itemize}
-        \item Outline the characteristics of the model and its decision-making process, making it clear to employees how their development plan is generated.
-        \item Build a user manual document to show employees how to use the system step-by-step.
-    \end{itemize}
-\end{enumerate}
-
-By looking at the abductive approach framework developed by \cite{thompson2022guide}, it gives us a clear guide on how to approach the study to reach the desired objectives of the research study.
-
-\subsubsection{Strategy}
-
-The kind of research approach we seek should combine both theoretical and applied approaches, summarized as action research by \cite{avison1999action}. In the work by \cite{davison2021research}, among others, they evaluate 16 different methods applied in action research, with an assessment of respective strengths and weaknesses. More importantly, \cite{davison2021research} introduce the idea of integrating such methods into what they call an integrated action research (IAR) method.
-
-Action research (AR) represents a collaborative and cyclical research methodology aimed at addressing practical challenges while enhancing scholarly knowledge, thereby intertwining the roles of academics and practitioners \cite{davison2021research}. Given its capacity to connect theoretical frameworks with practical applications—enabling reciprocal enlightenment between the two domains—AR is particularly advantageous for research in information systems (IS) \cite{avison1999action}. This methodology requires collaboration with participants through a continuous process of problem identification, strategic planning, implementation, observation, and reflective assessment \cite{lewin1946action}.
-
-The entire methodology of action research that will be used in this proposal is informed by the Canonical Action Research (CAR) framework. CAR brings rigor to action research studies while being flexible enough to fit the specifics of any given project. As noted by \cite{davison2021research}, this research will identify problems in the present system of individual development plans, introduce sequential enhancements, and test their effectiveness.
-
-\subsection{Choice of Methods}
-
-\subsubsection{Mixed Methods Approach}
-
-The approach leading to the development of a recommender model using deep learning for IDPs involves a mix of strengths from both qualitative and quantitative research paradigms. This methodological approach is significant because it provides an in-depth look at participants' subjective experiences while also statistically validating findings. This approach aligns with the Mixed Methods Appraisal Tool, which evaluates the integration of both quantitative and qualitative data in research as stated by \cite{oliveira2021mixed}.
-
-Therefore, the mixed-methods methodology is ideal for producing a rich and detailed understanding of the complexities involved in individual development planning. According to \cite{guetterman2016distinguishes}, the ability to integrate qualitative and quantitative data effectively distinguishes novice from expert mixed-methods researchers. In this research, these integrated aspects will offer insights into the subjective experience while establishing a deep learning model to forecast and suggest development plans.
-
-\subsubsection{Data Collection and Analysis}
-
-Data collection will involve both qualitative and quantitative approaches. Qualitative data will be gathered through interviews using semi-structured questionnaires, exploring participants' experiences and perceptions of their development plans. Quantitative data will be collected via questionnaires that measure various aspects of individual development, such as career goals, competence assessments, and evaluations of previous development programs \cite{tseng2023mixed}.
-
-Qualitative data will be analyzed through thematic coding, identifying patterns and themes using qualitative analysis software. This aligns with the conceptual model of \cite{morse2016planning}, highlighting the systematic analysis of qualitative data to inform the quantitative stage. Quantitative data will be analyzed using statistical techniques to uncover correlations and trends that augment understanding of the qualitative results.
-
-This sequential explanatory design will provide a comprehensive explanation by correlating personal experiences with statistical results, offering an improved overall examination.
-
-\subsubsection{Model Development}
-
-
-The findings leading from the integration of both qualitative and quantitative research methods create the foundation upon which the IDP recommender model is built. Qualitative results contribute to selecting the features of the deep learning model, thereby ensuring that no amount of subtlety associated with an individual's experience is lost on the model. 
-
-
-This becomes important given the interpretivist framework that supports the research wherein personal realities about \cite{speirs2020planning} are influenced by several personal, cultural, and environmental factors. Quantitative data give the stern backbone to train deep learning models. That is a mixed-method approach in which the strength of tenability of the present model derives and enables development plans based on past data to capture the difference in needs and aspirations of each, as narrated in qualitative interviews.
-
-
-This does allow the recommender system to be more personalized and effective, owing to the concurrent focus on data, hence increasing the importance and usefulness of the generated IDPs.
-
-\newpage
-\subsection{The Research Time Horizon}
-
-
-Longitudinal studies have high relevance in the study of individual variations over time; hence, such research extends the prospect for an in-depth understanding of dynamics driving processes concerning the planning of personal development, says \cite{kelley2011sample}.
-
-
-The present research tries to follow the participants at regular intervals with the aim of following the evolution of their strategies and of the recommender model's impact on their choice of career. The longitudinal methodology is pivotal for various reasons. Primarily, it facilitates the analysis of individual transformations across time, an aspect that is vital for comprehending how tailored development strategies can adjust to the changing requirements and ambitions of employees \cite{jung2023longitudinal}. This consideration holds particular significance within the realm of career progression, where elements such as job positions, competencies, and individual objectives can undergo considerable alterations over time.
-
-
-Moreover, longitudinal research allows the detection of trends and patterns that may be hidden in cross-sectional studies, thus providing a deeper level of insight into the effectiveness of the IDP recommender model \cite{kelley2011sample}.
-
-
-This longitudinal design puts a great demand for careful consideration concerning sample size and other aspects related to the collection of data. According to \cite{kelley2011sample}, planning in sample size is very essential in longitudinal studies for precision in estimating the parameters, achieving the desired confidence interval concerning the group differences in change. It is an aspect that ought to be present so that the results of this study become valid and could be generalized for different contexts and populations. The construction of the longitudinal study will also include structured data collection methods that reduce the fatigue of a participant and enhance participation.
-
-
-According to \cite{jung2023longitudinal}, one very important feature is fundamental in developing a highly structured longitudinal database that maintains participant engagement and assures data integrity over the study period. This involves engaging the respondents regularly, explaining the purpose of the study in clear terms, and ensuring that ethical considerations on data confidentiality and safety are adhered to.
+\section{Structure of the Thesis}
+\begin{itemize}
+    \item \textbf{Chapter 1: Introduction} — Context, problem statement, objectives, and thesis outline.
+    \item \textbf{Chapter 2: Literature Review} — Review of IDPs, recommender systems, and deep learning techniques.
+    \item \textbf{Chapter 3: Methodology} — Research design, model development strategy, and data collection methods.
+    \item \textbf{Chapter 4: Results and Analysis} — Experimental results and system evaluation.
+    \item \textbf{Chapter 5: Discussion and Conclusion} — Findings interpretation, research limitations, and future work.
+\end{itemize}

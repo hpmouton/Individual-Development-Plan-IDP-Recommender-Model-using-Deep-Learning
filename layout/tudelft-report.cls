@@ -52,7 +52,22 @@
 \RequirePackage[hidelinks]{hyperref}    % Improved referencing/links
 \RequirePackage[capitalise]{cleveref}
 \RequirePackage[ruled]{algorithm2e}
-\RequirePackage[sorting=none, maxbibnames=1, isbn=false]{biblatex}
+\RequirePackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+\usepackage{xcolor}  % To enable color for citations
+
+% Modify the \cite command for in-text citations to match the desired format
+\DeclareCiteCommand{\cite}
+    {\usebibmacro{prenote}}
+    {\textcolor{blue}{(\biblistitem\usebibmacro{citeindex}%
+        \printnames{labelname}\setunit{\addspace}{\thefield{labelyear}})}}
+    {\usebibmacro{postnote}}
+    {\usebibmacro{final}}
+
+% Ensure that the bibliography entry for author names is full, not abbreviated
+\DeclareFieldFormat{labelname}{\textcolor{blue}{\bibnamedelimi{\thefield{labelname}}}}
+\DeclareFieldFormat{labelyear}{\textcolor{blue}}
+
+
 
 \pgfplotsset{compat=newest}
 
@@ -125,13 +140,13 @@
 \titlespacing*{\part}{0pt}{0pt}{2\baselineskip}
 \setlength\epigraphwidth{.7\textwidth}
 
-% Formatting chapter titles and spacing
-\titleformat{\chapter}[display]
-    {\flushright}
-    {\fontsize{72}{72}\selectfont\largetitlestyle\thechapter}
-    {0pt}
-    {\Huge\titlestyle}
-\titlespacing*{\chapter}{0pt}{0pt}{2\baselineskip}
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries} % formatting for the whole line
+  {\thechapter.}              % what to display before the title (chapter number and dot)
+  {1em}                       % spacing between number and title
+  {}                          % code before title
+\titlespacing*{\chapter}{0pt}{0pt}{1em} % spacing: {left}{before}{after}
+
 
 % Formatting section titles and spacing
 \titleformat{\section}

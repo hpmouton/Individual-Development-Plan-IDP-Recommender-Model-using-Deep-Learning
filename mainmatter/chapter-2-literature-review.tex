@@ -1,0 +1,60 @@
+\chapter{Literature Review}
+\label{chapter:lit_review}
+
+% Leveldown and levelup commands allow to re-use chapters from the literature review but with different section levels.
+
+\newenvironment{leveldown}% Demote sectional commands
+  {\let\chapter\section
+   \let\section\subsection%
+   \let\subsection\subsubsection%
+   \let\subsubsection\paragraph%
+  }{}
+  
+\newenvironment{levelup}% Promote sectional commands
+  {\let\subparagraph\paragraph%
+   \let\paragraph\subsubsection%
+   \let\subsubsection\subsection%
+   \let\subsection\section%
+   \let\section\chapter
+}{}
+
+\begin{leveldown}
+
+\begin{table}[ht]
+    \centering
+    \caption{Summary of Related Works for the IDP Recommender System Study}
+    \label{tab:lit_review}
+    \begin{tabular}{@{}p{3cm}p{5cm}p{2cm}p{5cm}@{}}
+    \toprule
+    \textbf{Author(s) \& Year} & \textbf{Title} & \textbf{Methodology} & \textbf{Key Findings and Relevance} \\
+    \midrule
+    Vanderford et al. (2018) & Use of IDPs for doctoral trainees & Survey study & IDPs improve self-assessment and career planning; foundational to this study. \\
+    \midrule
+    Sahoo et al. (2019) & Deep learning in health recommender systems & Deep collaborative filtering (RBMs) & Deep learning improves recommendation accuracy; supports choice of deep learning. \\
+    \midrule
+    Mu (2018) & Survey of deep learning recommender systems & Literature review & Validates deep learning as superior for complex recommendation tasks. \\
+    \midrule
+    Li et al. (2024) & Knowledge graph-enhanced recommender systems & Attention and residual networks & Knowledge graphs improve personalization; important for IDP mappings. \\
+    \midrule
+    Chen \& Zhong (2024) & GCN-based course recommendation system & Graph Convolutional Networks (GCNs) & GCNs model complex relationships; informs modelling employee competencies. \\
+    \midrule
+    Ertürkman et al. (2019) & Personalized health management platforms & Collaborative platform development & Personalized plans outperform generic; supports personalizing IDPs. \\
+    \midrule
+    Gulzar et al. (2018) & Personalized course recommender systems & Hybrid recommendation methods & Combining methods improves engagement; supports multi-input IDP systems. \\
+    \midrule
+    Dabak et al. (2022) & Career development for Gen Y and Z & Developmental cycle framework & Adaptive planning needed for evolving careers; supports dynamic IDP updates. \\
+    \midrule
+    Ghaffar et al. (2022) & Impact of personality traits on planning & Empirical study in finance & Personality traits influence decision-making; suggests incorporating traits into IDPs. \\
+    \midrule
+    Wang et al. (2020) & Employee training course recommendations & Bayesian variational network modeling & Career goals improve recommendations; aligns with dynamic IDP needs. \\
+    \midrule
+    Bui et al. (2016) & Text classification from PDFs & Multi-pass sieve technique & Text extraction improves preprocessing; useful for automating employee documents. \\
+    \midrule
+    Viani et al. (2019) & Clinical event extraction with RNNs & Supervised learning & RNNs extract structured info from text; supports skill extraction automation. \\
+    \midrule
+    Lin et al. (2018) & Sparse linear method for recommendation & L0 regularization technique & Improved recommendation precision; useful for refining IDP suggestions. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\end{leveldown}
